@@ -54,10 +54,11 @@
               font=\normalsize]
           at (8mm, \rg@split-5mm)
           {\insertsubtitle};
-        \node[anchor=south west, text=rgink, inner sep=0, font=\large]
-          at (8mm, 11mm) {\insertauthor};
+        \node[anchor=south west, text=rgink, inner sep=0, font=\normalsize,
+              text width=\the\paperwidth-16mm, align=left]
+          at (8mm, 12mm) {\insertauthor};
         \node[anchor=south west, text=rgmute, inner sep=0, font=\footnotesize]
-          at (8mm, 6mm) {\insertdate};
+          at (8mm, 5.5mm) {\insertdate};
       \else
         \fill[rgpaper] (0,0) rectangle (\the\paperwidth,\the\paperheight);
         \fill[rgsteel]
