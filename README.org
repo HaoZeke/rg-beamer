@@ -1,19 +1,17 @@
 #+TITLE: rg-beamer
-#+DESCRIPTION: Beamer + KOMA theme. Copper spine, Source Serif 4 Display, Source Sans 3.
+#+DESCRIPTION: Beamer + KOMA theme. Steel title field, copper lip, Source Serif 4 Display.
 
 * What it is
 
-A talk theme and a report companion that share one mark: a copper
-spine on the left edge. On slides the spine is the progress bar. On
-paper it is just the spine.
+A talk theme drawn as one TikZ canvas, the same way Execushares is.
+The cover is a steel field. Content slides are a steel title bar with a
+copper lip. Progress is that lip growing along the foot.
 
-Type is the pairing already used in Execushares. Titles are Source
-Serif 4 Display. Slide body is Source Sans 3. Report body is Source
-Serif 4. Mono is Source Code Pro. Colour is cool lab paper, steel
-ink, and one copper.
+Type is the Execushares pairing. Titles are Source Serif 4 Display.
+Slide body is Source Sans 3. Report body is Source Serif 4 on white
+paper, shortPdf title, eisvogel head and foot rules.
 
-Not Metropolis (no title slab, no Fira). Not seahorse. Not a
-three-colour swap on someone else's canvas.
+Not Metropolis. Not seahorse. Not a stripe on empty paper.
 
 * Use from TeX
 
@@ -27,9 +25,8 @@ export TEXINPUTS="$HOME/Git/Github/TeX/rg-beamer/theme:"
 \usetheme{rg}
 #+end_src
 
-=noprogress= is accepted and currently unused: the spine is the
-progress. Frame option =standout= still inverts to steel, same as
-Metropolis.
+=noprogress= fills the foot bar. Frame option =standout= is a steel
+field, same option as Metropolis. =\institute= is the footer mark.
 
 Report:
 
@@ -60,27 +57,21 @@ theme.
      ~/.config/doom/snippets/org-mode/org-report-rg
    #+end_src
 
-   Keys: =<orgbbmrrg= (slides), =<orgrg= (report). Same after-save
-   hook as =orgBeamerMetropolis=.
-
-3. Or set =#+LaTeX_CLASS: rg-beamer= / =rg-report=.
-   =BEAMER_opt: standout= still works. =\institute= is the slide
-   footer mark.
+   Keys: =<orgbbmrrg= (slides), =<orgrg= (report).
 
 * Layout
 
 | Element | Treatment |
 |---+---|
-| Title page | paper, steel serif title, no rule, full-height spine |
-| Frame title | Source Serif 4 Display, no underline |
-| Progress | copper spine filling from the foot |
-| Block | copper left rule, title in the display face |
+| Title page | steel field on the top, copper lip, title in paper |
+| Frame title | white Display type in the steel bar |
+| Progress | copper growing in the foot bar |
+| Block | copper left rule |
 | Item | copper square |
-| Standout | steel field, paper type, full spine |
-| Report title | display serif, copper HRule, italic author |
-| Report page | the same spine, sans running head |
+| Standout | steel field, paper type |
+| Report | white paper, Display title, copper HRule, 0.4pt rules |
 
-16:9. Left-aligned. No navigation chrome.
+16:9. No navigation chrome.
 
 * Build the demo
 

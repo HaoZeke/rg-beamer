@@ -1,5 +1,5 @@
-%% Title page is a cover, not a rule under a heading.
-%% Blocks echo the spine: a copper rule, no fill.
+%% Cover and frame titles are painted in the outer canvas.
+%% Blocks keep a copper lip. Items are copper squares.
 \mode<presentation>
 
 \setbeamertemplate{itemize item}{%
@@ -21,17 +21,7 @@
 \setbeamertemplate{caption}{\insertcaption}
 \setbeamertemplate{caption label separator}{}
 
-\defbeamertemplate*{title page}{rg}[1][]{%
-  \vspace*{0.12\paperheight}%
-  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
-  \vspace{0.85em}%
-  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-  \vfill
-  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
-  \vspace{0.22em}%
-  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
-  \vspace{0.08\paperheight}%
-}
+\defbeamertemplate*{title page}{rg}[1][]{}
 
 \setbeamertemplate{block begin}{%
   \par\vskip\medskipamount

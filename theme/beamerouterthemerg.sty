@@ -1,69 +1,104 @@
-%% The copper spine is drawn in `background` with a real bounding box.
-%% overlay/remember-picture on background canvas does not paint.
+%% One TikZ canvas, same architecture as Execushares.
+%% Cover = steel field. Content = steel title bar + copper lip + foot progress.
 \mode<presentation>
 
 \RequirePackage{tikz}
 
 \makeatletter
-\newdimen\rg@railwd
-\rg@railwd=4.4mm
+\newdimen\rg@barht
+\rg@barht=11.6mm
+\newdimen\rg@lip
+\rg@lip=2.3pt
 \newdimen\rg@progressht
+\rg@progressht=2.5mm
+\newdimen\rg@progresswd
+\newdimen\rg@split
 
 \def\rg@setprogress{%
-  \rg@progressht=\paperheight
+  \rg@progresswd=\paperwidth
   \ifdefstring{\rg@progress}{false}{}{%
-    \ifnum\insertframenumber=1
-    \else
-      \ifnum\inserttotalframenumber>0
-        \multiply\rg@progressht by \insertframenumber
-        \divide\rg@progressht by \inserttotalframenumber
-      \fi
+    \ifnum\inserttotalframenumber>0
+      \multiply\rg@progresswd by \insertframenumber
+      \divide\rg@progresswd by \inserttotalframenumber
     \fi
   }%
 }
 
+\def\rg@fonttitle{%
+  \ifdefined\rgdisplay\rgdisplay\fi
+  \bfseries\fontsize{18}{22}\selectfont
+}
+\def\rg@fontcover{%
+  \ifdefined\rgdisplay\rgdisplay\fi
+  \bfseries\fontsize{26}{30}\selectfont
+}
+
 \defbeamertemplate*{background}{rg}{%
   \rg@setprogress
+  \rg@split=0.40\paperheight
   \begin{tikzpicture}
     \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
     \ifbool{rg@standout}{%
       \fill[rgsteel] (0,0) rectangle (\the\paperwidth,\the\paperheight);
-      \fill[rgcopper] (0,0) rectangle (\rg@railwd,\the\paperheight);
     }{%
-      \fill[rgpaper] (0,0) rectangle (\the\paperwidth,\the\paperheight);
-      \fill[rgwell] (0,0) rectangle (\rg@railwd,\the\paperheight);
-      \fill[rgcopper] (0,0) rectangle (\rg@railwd,\rg@progressht);
+      \ifnum\insertframenumber=1
+        \fill[rgpaper] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+        \fill[rgsteel] (0,\rg@split) rectangle (\the\paperwidth,\the\paperheight);
+        \fill[rgcopper] (0,\rg@split) rectangle (\the\paperwidth,\rg@split+\rg@lip);
+        \node[anchor=south west, text=rgpaper, inner sep=0,
+              text width=\the\paperwidth-16mm, align=left]
+          at (8mm, \rg@split+7mm)
+          {\rg@fontcover\inserttitle};
+        \node[anchor=north west, text=rgmute, inner sep=0,
+              text width=\the\paperwidth-16mm, align=left,
+              font=\normalsize]
+          at (8mm, \rg@split-5mm)
+          {\insertsubtitle};
+        \node[anchor=south west, text=rgink, inner sep=0, font=\large]
+          at (8mm, 11mm) {\insertauthor};
+        \node[anchor=south west, text=rgmute, inner sep=0, font=\footnotesize]
+          at (8mm, 6mm) {\insertdate};
+      \else
+        \fill[rgpaper] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+        \fill[rgsteel]
+          (0, \the\paperheight-\rg@barht)
+          rectangle (\the\paperwidth, \the\paperheight);
+        \fill[rgcopper]
+          (0, \the\paperheight-\rg@barht-\rg@lip)
+          rectangle (\the\paperwidth, \the\paperheight-\rg@barht);
+        \node[anchor=west, text=rgpaper, inner sep=0]
+          at (8mm, \the\paperheight-0.52\rg@barht)
+          {\rg@fonttitle\insertframetitle};
+        \fill[rgtrack] (0,0) rectangle (\the\paperwidth, \rg@progressht);
+        \fill[rgcopper] (0,0) rectangle (\rg@progresswd, \rg@progressht);
+        \node[anchor=south west, text=rgmute, inner sep=0, font=\tiny]
+          at (8mm, \rg@progressht+1.4mm) {\insertinstitute};
+        \node[anchor=south east, text=rgmute, inner sep=0, font=\tiny]
+          at (\the\paperwidth-6mm, \rg@progressht+1.4mm)
+          {\insertframenumber\,/\,\inserttotalframenumber};
+      \fi
     }%
   \end{tikzpicture}%
 }
 
-\defbeamertemplate*{frametitle}{rg}[1][]{%
-  \nointerlineskip
-  \vspace{0.95em}%
-  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}%
-    \insertframetitle\par}%
-  \ifx\insertframesubtitle\@empty\else
-    \vspace{0.18em}%
-    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}%
-      \insertframesubtitle\par}%
-  \fi
-  \vspace{0.75em}%
+%% Space for the painted bar. Title itself is in the canvas.
+\defbeamertemplate*{headline}{rg}{%
+  \ifbool{rg@standout}{}{%
+    \ifnum\insertframenumber=1
+    \else
+      \vspace*{12.2mm}%
+    \fi
+  }%
 }
-
+\defbeamertemplate*{frametitle}{rg}{}
 \defbeamertemplate*{footline}{rg}{%
-  \leavevmode
-  \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth, ht=3.4ex, dp=2.0ex]{footline}%
-      \hspace{14mm}%
-      \usebeamerfont{page number in head/foot}%
-      \usebeamercolor[fg]{page number in head/foot}%
-      \insertinstitute
-      \hfill
-      \insertframenumber\,/\,\inserttotalframenumber\hspace{4mm}%
-    \end{beamercolorbox}}%
+  \ifbool{rg@standout}{}{%
+    \ifnum\insertframenumber=1
+    \else
+      \vspace*{5.4mm}%
+    \fi
+  }%
 }
-
-\setbeamertemplate{headline}{}
 \setbeamertemplate{background canvas}{}
 \makeatother
 
