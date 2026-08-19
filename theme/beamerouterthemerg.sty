@@ -18,8 +18,8 @@
   \rg@progresswd=\paperwidth
   \ifdefstring{\rg@progress}{false}{}{%
     \ifnum\inserttotalframenumber>0
-      \multiply\rg@progresswd by \insertframenumber
       \divide\rg@progresswd by \inserttotalframenumber
+      \multiply\rg@progresswd by \insertframenumber
     \fi
   }%
 }
