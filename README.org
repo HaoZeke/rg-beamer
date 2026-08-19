@@ -37,6 +37,11 @@ Report:
 \usepackage{fontspec}
 \usepackage{rg-report}
 \rgreportmark{short head}{date}{footer}
+\rggrant{EINF-13109}
+\rgseries{SURF PromApp}
+\rgfor{the PI}
+\rgcoverimage{hero.png}
+\rgcoverlogos{org-logo.pdf}{code-logo.pdf}
 #+end_src
 
 Build with xelatex. fontspec is loaded by the document, not by the

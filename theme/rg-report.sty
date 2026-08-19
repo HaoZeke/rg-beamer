@@ -59,9 +59,17 @@
 \newcommand{\rg@series}{}
 \newcommand{\rg@grant}{}
 \newcommand{\rg@for}{}
+\newcommand{\rg@coverimage}{}
+\newcommand{\rg@logoA}{}
+\newcommand{\rg@logoB}{}
 \newcommand{\rgseries}[1]{\renewcommand{\rg@series}{#1}}
 \newcommand{\rggrant}[1]{\renewcommand{\rg@grant}{#1}}
 \newcommand{\rgfor}[1]{\renewcommand{\rg@for}{#1}}
+\newcommand{\rgcoverimage}[1]{\renewcommand{\rg@coverimage}{#1}}
+\newcommand{\rgcoverlogos}[2]{%
+  \renewcommand{\rg@logoA}{#1}%
+  \renewcommand{\rg@logoB}{#2}%
+}
 
 % Cover: IPAM wgtex architecture (left bar, bottom bar, open field)
 % in the steel/copper palette. Cover only; body stays white paper.
@@ -79,6 +87,21 @@
       \fill[rgcopper]
         (current page.south west)
         rectangle ([yshift=4.5mm]current page.south east);
+      \ifdefempty{\rg@logoA}{}{%
+        \node[anchor=north east, inner sep=0]
+          at ([xshift=-13mm,yshift=-13mm]current page.north east)
+          {%
+            \IfFileExists{\rg@logoA}{\includegraphics[height=12mm]{\rg@logoA}}{}%
+            \ifdefempty{\rg@logoB}{}{\hspace{5.5mm}%
+              \IfFileExists{\rg@logoB}{\includegraphics[height=8.2mm]{\rg@logoB}}{}}%
+          };}
+      \ifdefempty{\rg@coverimage}{}{%
+        \node[anchor=south east, inner sep=0]
+          at ([xshift=-11mm,yshift=17mm]current page.south east)
+          {%
+            \IfFileExists{\rg@coverimage}{%
+              \includegraphics[width=0.50\paperwidth]{\rg@coverimage}}{}%
+          };}
     \end{tikzpicture}%
     \parindent=0pt
     \vspace*{2.4cm}%
