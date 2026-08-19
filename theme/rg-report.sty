@@ -50,17 +50,62 @@
 \addtokomafont{title}{\rgdisplay\color{rgsteel}}
 \addtokomafont{disposition}{\rgdisplay}
 
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
 \RequirePackage[font={small,sf,it},labelfont={bf,sf,color=rgsteel}]{caption}
 \renewcommand{\arraystretch}{1.22}
 
 \newcommand{\HRule}{\textcolor{rgcopper}{\rule{\linewidth}{2pt}}}
+\newcommand{\rg@series}{}
+\newcommand{\rg@grant}{}
+\newcommand{\rg@for}{}
+\newcommand{\rgseries}[1]{\renewcommand{\rg@series}{#1}}
+\newcommand{\rggrant}[1]{\renewcommand{\rg@grant}{#1}}
+\newcommand{\rgfor}[1]{\renewcommand{\rg@for}{#1}}
+
+% Cover: IPAM wgtex architecture (left bar, bottom bar, open field)
+% in the steel/copper palette. Cover only; body stays white paper.
 \makeatletter
 \renewcommand{\@maketitle}{%
-  \parindent=0pt
-  {\rgdisplay\fontsize{22}{26}\selectfont\bfseries\color{rgsteel}\@title\par}%
-  \vspace{0.45em}\HRule\par\vspace{0.50em}%
-  {\small\sffamily\color{rgmute}\textit{\@author}\hfill\@date\par}%
-  \vspace{1.15em}%
+  \begin{titlepage}%
+    \thispagestyle{empty}%
+    \begin{tikzpicture}[remember picture, overlay]
+      \fill[rgsteel]
+        (current page.south west)
+        rectangle ([xshift=11mm]current page.north west);
+      \fill[rgcopper]
+        ([xshift=11mm]current page.south west)
+        rectangle ([xshift=11mm+2.3pt]current page.north west);
+      \fill[rgcopper]
+        (current page.south west)
+        rectangle ([yshift=4.5mm]current page.south east);
+    \end{tikzpicture}%
+    \parindent=0pt
+    \vspace*{2.4cm}%
+    {\sffamily\small\color{rgcopper}%
+      \ifdefempty{\rg@grant}{}{\rg@grant}%
+      \ifdefempty{\rg@series}{}{%
+        \ifdefempty{\rg@grant}{}{\,\textperiodcentered\,}%
+        \rg@series}\par}%
+    \vspace{1.5cm}%
+    {\rgdisplay\fontsize{26}{31}\selectfont\bfseries\color{rgsteel}%
+      \@title\par}%
+    \ifdefined\@subtitle
+      \ifx\@subtitle\@empty\else
+        \vspace{0.55em}%
+        {\sffamily\large\color{rgmute}\@subtitle\par}%
+      \fi
+    \fi
+    \vspace{2.1cm}%
+    {\rgdisplay\large\color{rgsteel}\@author\par}%
+    \vspace{0.55em}%
+    {\sffamily\small\color{rgmute}\@date\par}%
+    \vfill
+    \ifdefempty{\rg@for}{}{%
+      {\sffamily\small\color{rgmute}For \rg@for\par}}%
+    \vspace{1.35cm}%
+  \end{titlepage}%
+  \setcounter{page}{1}%
 }
 \makeatother
 
@@ -86,6 +131,6 @@
 
 \RequirePackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=rgsteel,urlcolor=rgsteel,citecolor=rgsteel}
-\renewcommand{\abstractname}{}
+\renewcommand{\abstractname}{Abstract}
 
 \endinput

@@ -17,6 +17,8 @@
 #+LATEX_HEADER: \\usepackage{fontspec}
 #+LATEX_HEADER: \\usepackage{rg-report}
 #+LATEX_HEADER: \\rgreportmark{${4:short head}}{$3}{$2}
+#+LATEX_HEADER: \\rggrant{${7:EINF-}}
+#+LATEX_HEADER: \\rgseries{${8:SURF PromApp}}
 
 #+begin_abstract
 \\noindent $5

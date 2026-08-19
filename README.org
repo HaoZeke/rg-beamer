@@ -9,7 +9,9 @@ copper lip. Progress is that lip growing along the foot.
 
 Type is the Execushares pairing. Titles are Source Serif 4 Display.
 Slide body is Source Sans 3. Report body is Source Serif 4 on white
-paper, shortPdf title, eisvogel head and foot rules.
+paper. The cover is the IPAM working-group architecture
+(left bar, bottom bar, open field) in steel and copper.
+Body pages keep eisvogel head and foot rules.
 
 Not Metropolis. Not seahorse. Not a stripe on empty paper.
 
@@ -69,7 +71,8 @@ theme.
 | Block | copper left rule |
 | Item | copper square |
 | Standout | steel field, paper type |
-| Report | white paper, Display title, copper HRule, 0.4pt rules |
+| Report cover | steel left bar, copper lip and foot bar, Display title |
+| Report body | white paper, 0.4pt head and foot rules |
 
 16:9. No navigation chrome.
 
