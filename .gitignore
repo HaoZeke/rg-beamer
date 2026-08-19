@@ -313,6 +313,8 @@ TSWLatexianTemp*
 *.tps
 
 # auto folder when using emacs and auctex
+# Keep the Doom helper; TeX gibo ignores every *.el.
+!emacs/*.el
 ./auto/*
 *.el
 
