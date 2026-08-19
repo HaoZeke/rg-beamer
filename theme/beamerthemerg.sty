@@ -9,28 +9,30 @@
 \ExecuteOptionsBeamer{progress}
 \ProcessOptionsBeamer
 
+\makeatletter
+\providebool{rg@standout}
+\makeatother
+
 \useinnertheme{rg}
 \useoutertheme{rg}
 \usecolortheme{rg}
 \usefonttheme{rg}
 
-\setbeamersize{text margin left=11mm, text margin right=11mm}
+%% Clear of the 5.6pt spine.
+\setbeamersize{text margin left=13mm, text margin right=11mm}
 \setbeamertemplate{navigation symbols}{}
 
 %% Same option name as Metropolis so existing org snippets keep working.
 \makeatletter
-\providebool{rg@standout}
 \define@key{beamerframe}{standout}[true]{%
   \rg@standouttrue
-  \begingroup
-  \setkeys{beamerframe}{c}%
-  \endgroup
-  \setbeamercolor{background canvas}{bg=rgteal}%
-  \setbeamercolor{normal text}{fg=rgpaper, bg=rgteal}%
-  \setbeamercolor{frametitle}{fg=rgpaper, bg=rgteal}%
+  \setkeys{beamerframe}{c,plain}%
+  \setbeamercolor{normal text}{fg=rgpaper, bg=rgsteel}%
+  \setbeamercolor{frametitle}{fg=rgpaper, bg=rgsteel}%
   \setbeamercolor{local structure}{fg=rgpaper}%
-  \setbeamertemplate{footline}{}%
-  \setbeamertemplate{frametitle}[default][center]%
+  \setbeamerfont{normal text}{size=\Large, series=\bfseries}%
+  \usebeamercolor[fg]{normal text}%
+  \centering
 }
 \pretocmd{\beamer@reseteecodes}{\rg@standoutfalse}{}{}
 \makeatother

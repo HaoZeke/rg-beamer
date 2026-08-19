@@ -8,6 +8,7 @@
 #+AUTHOR:    ${3:Rohit Goswami}
 #+EMAIL:     ${4:r.goswami@rug.nl}
 #+DATE:      \\today
+#+BEAMER_HEADER: \\institute{${5:EINF-13109}}
 
 #+OPTIONS:   H:2 num:nil toc:nil \\n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:nil pri:nil tags:not-in-toc
@@ -25,7 +26,7 @@
 #+LATEX_HEADER: \\usepackage{amsmath,amssymb}
 #+LATEX_HEADER: \\usepackage{hyperref}
 
-* ${5:Opening}
+* ${6:Opening}
 
 $0
 

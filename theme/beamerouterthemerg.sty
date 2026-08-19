@@ -1,61 +1,70 @@
-%% Outer: one coral rule is the title underline and the progress bar.
+%% The copper spine is drawn in `background` with a real bounding box.
+%% overlay/remember-picture on background canvas does not paint.
 \mode<presentation>
 
 \RequirePackage{tikz}
-\RequirePackage{calc}
 
 \makeatletter
-\newdimen\rg@ruleht
-\rg@ruleht=2.2pt
-\newdimen\rg@progresswd
+\newdimen\rg@railwd
+\rg@railwd=4.4mm
+\newdimen\rg@progressht
 
 \def\rg@setprogress{%
-  \rg@progresswd=\paperwidth
-  \ifnum\inserttotalframenumber>0
-    \multiply\rg@progresswd by \insertframenumber
-    \divide\rg@progresswd by \inserttotalframenumber
-  \fi
+  \rg@progressht=\paperheight
+  \ifdefstring{\rg@progress}{false}{}{%
+    \ifnum\insertframenumber=1
+    \else
+      \ifnum\inserttotalframenumber>0
+        \multiply\rg@progressht by \insertframenumber
+        \divide\rg@progressht by \inserttotalframenumber
+      \fi
+    \fi
+  }%
+}
+
+\defbeamertemplate*{background}{rg}{%
+  \rg@setprogress
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+    \ifbool{rg@standout}{%
+      \fill[rgsteel] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+      \fill[rgcopper] (0,0) rectangle (\rg@railwd,\the\paperheight);
+    }{%
+      \fill[rgpaper] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+      \fill[rgwell] (0,0) rectangle (\rg@railwd,\the\paperheight);
+      \fill[rgcopper] (0,0) rectangle (\rg@railwd,\rg@progressht);
+    }%
+  \end{tikzpicture}%
 }
 
 \defbeamertemplate*{frametitle}{rg}[1][]{%
   \nointerlineskip
-  \vspace{1.1em}%
+  \vspace{0.95em}%
   {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}%
     \insertframetitle\par}%
   \ifx\insertframesubtitle\@empty\else
-    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{subtitle}%
+    \vspace{0.18em}%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}%
       \insertframesubtitle\par}%
   \fi
-  \vspace{0.45em}%
-  {\color{rgcoral}\rule{0.22\textwidth}{\rg@ruleht}}%
-  \vspace{0.55em}%
+  \vspace{0.75em}%
 }
 
 \defbeamertemplate*{footline}{rg}{%
-  \rg@setprogress
   \leavevmode
   \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth, ht=3.4ex, dp=1.4ex]{footline}%
-      \ifx\rg@progress\undefined
-      \else
-        \ifx\rg@progress\false
-        \else
-          \begin{tikzpicture}[overlay, remember picture]
-            \fill[rgpaper]
-              (current page.south west) rectangle ++(\paperwidth, 2.2pt);
-            \fill[rgcoral]
-              (current page.south west) rectangle ++(\rg@progresswd, 2.2pt);
-          \end{tikzpicture}%
-        \fi
-      \fi
-      \hfill
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3.4ex, dp=2.0ex]{footline}%
+      \hspace{14mm}%
       \usebeamerfont{page number in head/foot}%
       \usebeamercolor[fg]{page number in head/foot}%
-      \insertframenumber\,/\,\inserttotalframenumber\hspace{3.2mm}%
+      \insertinstitute
+      \hfill
+      \insertframenumber\,/\,\inserttotalframenumber\hspace{4mm}%
     \end{beamercolorbox}}%
 }
 
 \setbeamertemplate{headline}{}
+\setbeamertemplate{background canvas}{}
 \makeatother
 
 \mode<all>

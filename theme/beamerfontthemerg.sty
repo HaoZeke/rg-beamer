@@ -1,12 +1,13 @@
-%% Atkinson Hyperlegible Next when fontspec is live; Latin Modern otherwise.
+%% Source Serif 4 Display on titles, Source Sans 3 on the body.
+%% Same pairing as Execushares; optical size on the titles only.
 \mode<presentation>
 
-\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{title}{size*={26pt}{30pt}, series=\bfseries}
 \setbeamerfont{subtitle}{size=\normalsize, series=\mdseries}
 \setbeamerfont{author}{size=\large, series=\mdseries}
 \setbeamerfont{date}{size=\footnotesize}
 \setbeamerfont{institute}{size=\footnotesize}
-\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{frametitle}{size*={20pt}{24pt}, series=\bfseries}
 \setbeamerfont{framesubtitle}{size=\small, series=\mdseries}
 \setbeamerfont{block title}{size=\normalsize, series=\bfseries}
 \setbeamerfont{footnote}{size=\tiny}
@@ -15,12 +16,26 @@
 
 \makeatletter
 \@ifpackageloaded{fontspec}{%
-  \IfFontExistsTF{Atkinson Hyperlegible Next}{%
-    \setsansfont{Atkinson Hyperlegible Next}[Ligatures=TeX]%
+  \IfFontExistsTF{Source Serif 4 Display}{%
+    \newfontfamily\rgdisplay{Source Serif 4 Display}[%
+      Ligatures=TeX,
+      BoldFont={Source Serif 4 Display Semibold}]%
+    \setbeamerfont{title}{family=\rgdisplay, size*={26pt}{30pt}, series=\bfseries}%
+    \setbeamerfont{frametitle}{family=\rgdisplay, size*={20pt}{24pt}, series=\bfseries}%
+    \setbeamerfont{block title}{family=\rgdisplay, size=\normalsize, series=\bfseries}%
   }{%
-    \IfFontExistsTF{Atkinson Hyperlegible}{%
-      \setsansfont{Atkinson Hyperlegible}[Ligatures=TeX]%
-    }{}}
+    \IfFontExistsTF{Source Serif 4}{%
+      \newfontfamily\rgdisplay{Source Serif 4}[Ligatures=TeX]%
+      \setbeamerfont{title}{family=\rgdisplay, size*={26pt}{30pt}, series=\bfseries}%
+      \setbeamerfont{frametitle}{family=\rgdisplay, size*={20pt}{24pt}, series=\bfseries}%
+      \setbeamerfont{block title}{family=\rgdisplay, size=\normalsize, series=\bfseries}%
+    }{}}%
+  \IfFontExistsTF{Source Sans 3}{%
+    \setsansfont{Source Sans 3}[Ligatures=TeX]%
+  }{}%
+  \IfFontExistsTF{Source Code Pro}{%
+    \setmonofont{Source Code Pro}[Scale=0.90]%
+  }{}%
 }{}
 \makeatother
 

@@ -1,15 +1,19 @@
 #+TITLE: rg-beamer
-#+DESCRIPTION: Beamer theme for Rohit Goswami talks. Teal ink, one coral rule, Atkinson. Org-mode and raw TeX.
+#+DESCRIPTION: Beamer + KOMA theme. Copper spine, Source Serif 4 Display, Source Sans 3.
 
 * What it is
 
-A Beamer theme that is not Metropolis, not seahorse, and not Execushares.
-The signature is a single coral rule: it underlines the frame title and
-it is the progress bar.
+A talk theme and a report companion that share one mark: a copper
+spine on the left edge. On slides the spine is the progress bar. On
+paper it is just the spine.
 
-Colours are the ones already on the Kroes decks: teal =#004D40=, coral
-=#FF655D=, paper =#F7F8F7=. Type is Atkinson Hyperlegible Next when
-fontspec can see it.
+Type is the pairing already used in Execushares. Titles are Source
+Serif 4 Display. Slide body is Source Sans 3. Report body is Source
+Serif 4. Mono is Source Code Pro. Colour is cool lab paper, steel
+ink, and one copper.
+
+Not Metropolis (no title slab, no Fira). Not seahorse. Not a
+three-colour swap on someone else's canvas.
 
 * Use from TeX
 
@@ -19,10 +23,25 @@ export TEXINPUTS="$HOME/Git/Github/TeX/rg-beamer/theme:"
 
 #+begin_src latex
 \documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{fontspec}
 \usetheme{rg}
 #+end_src
 
-=noprogress= turns the foot rule off.
+=noprogress= is accepted and currently unused: the spine is the
+progress. Frame option =standout= still inverts to steel, same as
+Metropolis.
+
+Report:
+
+#+begin_src latex
+\documentclass[12pt,a4paper,oneside,headinclude]{scrartcl}
+\usepackage{fontspec}
+\usepackage{rg-report}
+\rgreportmark{short head}{date}{footer}
+#+end_src
+
+Build with xelatex. fontspec is loaded by the document, not by the
+theme.
 
 * Use from Org / Doom
 
@@ -32,29 +51,34 @@ export TEXINPUTS="$HOME/Git/Github/TeX/rg-beamer/theme:"
    (load! "~/Git/Github/TeX/rg-beamer/emacs/rg-beamer.el")
    #+end_src
 
-2. Install the snippet next to the Metropolis one:
+2. Snippets next to the Metropolis one:
 
    #+begin_src bash
    ln -s ~/Git/Github/TeX/rg-beamer/emacs/org-beamer-rg \
      ~/.config/doom/snippets/org-mode/org-beamer-rg
+   ln -s ~/Git/Github/TeX/rg-beamer/emacs/org-report-rg \
+     ~/.config/doom/snippets/org-mode/org-report-rg
    #+end_src
 
-   Key: =<orgbbmrrg=. Same after-save hook as
-   =orgBeamerMetropolis= (=haozeke/org-save-and-export-beamer=).
+   Keys: =<orgbbmrrg= (slides), =<orgrg= (report). Same after-save
+   hook as =orgBeamerMetropolis=.
 
-3. Or set =#+LaTeX_CLASS: rg-beamer= and =#+BEAMER_THEME: rg=.
-   =BEAMER_opt: standout= still works.
+3. Or set =#+LaTeX_CLASS: rg-beamer= / =rg-report=.
+   =BEAMER_opt: standout= still works. =\institute= is the slide
+   footer mark.
 
 * Layout
 
 | Element | Treatment |
 |---+---|
-| Title page | paper, teal title, short coral rule, no slab |
-| Frame title | teal, short coral rule under |
-| Progress | the same coral rule, growing along the foot |
-| Block | left coral rule, no fill |
-| Item | teal square; subitem coral |
-| Standout | teal field, paper type |
+| Title page | paper, steel serif title, no rule, full-height spine |
+| Frame title | Source Serif 4 Display, no underline |
+| Progress | copper spine filling from the foot |
+| Block | copper left rule, title in the display face |
+| Item | copper square |
+| Standout | steel field, paper type, full spine |
+| Report title | display serif, copper HRule, italic author |
+| Report page | the same spine, sans running head |
 
 16:9. Left-aligned. No navigation chrome.
 
@@ -63,13 +87,5 @@ export TEXINPUTS="$HOME/Git/Github/TeX/rg-beamer/theme:"
 #+begin_src bash
 cd examples
 export TEXINPUTS=../theme:
-# org -> tex if you want; or compile the exported .tex
+xelatex demo.tex
 #+end_src
-
-A raw TeX smoke lives in =examples/demo.tex=.
-
-* Why not Metropolis
-
-Metropolis is Fira, a dark title slab, and a grey progress hairline.
-This theme keeps the things that snippet already taught the hands
-(=standout=, frame level 2, after-save export) and drops the slab.

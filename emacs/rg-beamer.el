@@ -34,12 +34,19 @@
       (setenv "TEXINPUTS" (concat dir ":" cur)))))
 
 (defun rg-beamer-register-org-class ()
-  "Add `rg-beamer' to `org-latex-classes'."
+  "Add `rg-beamer' and `rg-report' to `org-latex-classes'."
   (require 'ox-latex)
   (unless (assoc "rg-beamer" org-latex-classes)
     (add-to-list 'org-latex-classes
                  '("rg-beamer"
                    "\\documentclass[aspectratio=169,11pt]{beamer}\n\\usetheme{rg}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+  (unless (assoc "rg-report" org-latex-classes)
+    (add-to-list 'org-latex-classes
+                 '("rg-report"
+                   "\\documentclass[12pt,a4paper,oneside,headinclude]{scrartcl}"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))

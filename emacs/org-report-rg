@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: org-report rg
+# contributor: Rohit Goswami (HaoZeke)
+# key: <orgrg
+# --
+#+TITLE:     ${1:Title}
+#+AUTHOR:    ${2:Rohit Goswami}
+#+DATE:      ${3:\\today}
+#+OPTIONS:   toc:nil title:nil num:t
+#+STARTUP:   fninline
+#+EXCLUDE_TAGS: noexport
+
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: rg-report
+#+LATEX_CLASS_OPTIONS: [12pt,a4paper,oneside,headinclude]
+
+#+LATEX_HEADER: \\usepackage{fontspec}
+#+LATEX_HEADER: \\usepackage{rg-report}
+#+LATEX_HEADER: \\rgreportmark{${4:short head}}{$3}{$2}
+
+#+begin_abstract
+\\noindent $5
+#+end_abstract
+
+* ${6:Opening}
+
+$0
+
+# Local Variables:
+# after-save-hook: haozeke/org-save-and-export-pdf
+# End:
