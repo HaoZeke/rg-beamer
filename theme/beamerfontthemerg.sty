@@ -1,0 +1,29 @@
+%% Atkinson Hyperlegible Next when fontspec is live; Latin Modern otherwise.
+\mode<presentation>
+
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize, series=\mdseries}
+\setbeamerfont{author}{size=\large, series=\mdseries}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{institute}{size=\footnotesize}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\small, series=\mdseries}
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamerfont{page number in head/foot}{size=\tiny}
+
+\makeatletter
+\@ifpackageloaded{fontspec}{%
+  \IfFontExistsTF{Atkinson Hyperlegible Next}{%
+    \setsansfont{Atkinson Hyperlegible Next}[Ligatures=TeX]%
+  }{%
+    \IfFontExistsTF{Atkinson Hyperlegible}{%
+      \setsansfont{Atkinson Hyperlegible}[Ligatures=TeX]%
+    }{}}
+}{}
+\makeatother
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\mode<all>

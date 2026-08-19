@@ -1,0 +1,58 @@
+#+TITLE: rg-beamer
+#+SUBTITLE: one coral rule
+#+AUTHOR: Rohit Goswami
+#+DATE: 2026-08-19
+#+OPTIONS: H:2 num:nil toc:nil
+#+LATEX_COMPILER: xelatex
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169,11pt]
+#+BEAMER_THEME: rg
+#+BEAMER_FRAME_LEVEL: 2
+
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{amsmath}
+
+* Opening
+The group runs the site module this month.
+
+- Teal ink, coral rule, Atkinson
+- Blocks are a left rule, not a filled box
+- =standout= inverts to teal, same option as Metropolis
+
+** Two columns
+
+*** Left                                                   :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.48
+:END:
+The NWO Large is written from numbers we already have.
+
+*** Right                                                  :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.48
+:END:
+PromApp continues with the QMCPACK developers.
+
+* A number
+\begin{block}{What the group runs}
+\texttt{QMCPACK/4.3.9-20260811} on genoa. \texttt{v1}. $\tau = 0.005$.
+\end{block}
+
+A tuned node is 258\,SBU per million walker-steps.
+
+* A table
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & July & Now \\
+\midrule
+SBU per $10^6$ & 1450 & 258 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+* End
+:PROPERTIES:
+:BEAMER_opt: standout
+:END:
+Write the Large. Keep working together.

@@ -1,0 +1,38 @@
+%% beamerthemerg.sty -- HaoZeke / Rohit Goswami talk theme
+%% Load with \usetheme{rg} after this directory is on TEXINPUTS.
+\mode<presentation>
+
+\RequirePackage{etoolbox}
+
+\DeclareOptionBeamer{progress}{\def\rg@progress{true}}
+\DeclareOptionBeamer{noprogress}{\def\rg@progress{false}}
+\ExecuteOptionsBeamer{progress}
+\ProcessOptionsBeamer
+
+\useinnertheme{rg}
+\useoutertheme{rg}
+\usecolortheme{rg}
+\usefonttheme{rg}
+
+\setbeamersize{text margin left=11mm, text margin right=11mm}
+\setbeamertemplate{navigation symbols}{}
+
+%% Same option name as Metropolis so existing org snippets keep working.
+\makeatletter
+\providebool{rg@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \rg@standouttrue
+  \begingroup
+  \setkeys{beamerframe}{c}%
+  \endgroup
+  \setbeamercolor{background canvas}{bg=rgteal}%
+  \setbeamercolor{normal text}{fg=rgpaper, bg=rgteal}%
+  \setbeamercolor{frametitle}{fg=rgpaper, bg=rgteal}%
+  \setbeamercolor{local structure}{fg=rgpaper}%
+  \setbeamertemplate{footline}{}%
+  \setbeamertemplate{frametitle}[default][center]%
+}
+\pretocmd{\beamer@reseteecodes}{\rg@standoutfalse}{}{}
+\makeatother
+
+\mode<all>

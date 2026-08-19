@@ -1,0 +1,75 @@
+#+TITLE: rg-beamer
+#+DESCRIPTION: Beamer theme for Rohit Goswami talks. Teal ink, one coral rule, Atkinson. Org-mode and raw TeX.
+
+* What it is
+
+A Beamer theme that is not Metropolis, not seahorse, and not Execushares.
+The signature is a single coral rule: it underlines the frame title and
+it is the progress bar.
+
+Colours are the ones already on the Kroes decks: teal =#004D40=, coral
+=#FF655D=, paper =#F7F8F7=. Type is Atkinson Hyperlegible Next when
+fontspec can see it.
+
+* Use from TeX
+
+#+begin_src bash
+export TEXINPUTS="$HOME/Git/Github/TeX/rg-beamer/theme:"
+#+end_src
+
+#+begin_src latex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{rg}
+#+end_src
+
+=noprogress= turns the foot rule off.
+
+* Use from Org / Doom
+
+1. Load the helper once in =config.org=:
+
+   #+begin_src emacs-lisp
+   (load! "~/Git/Github/TeX/rg-beamer/emacs/rg-beamer.el")
+   #+end_src
+
+2. Install the snippet next to the Metropolis one:
+
+   #+begin_src bash
+   ln -s ~/Git/Github/TeX/rg-beamer/emacs/org-beamer-rg \
+     ~/.config/doom/snippets/org-mode/org-beamer-rg
+   #+end_src
+
+   Key: =<orgbbmrrg=. Same after-save hook as
+   =orgBeamerMetropolis= (=haozeke/org-save-and-export-beamer=).
+
+3. Or set =#+LaTeX_CLASS: rg-beamer= and =#+BEAMER_THEME: rg=.
+   =BEAMER_opt: standout= still works.
+
+* Layout
+
+| Element | Treatment |
+|---+---|
+| Title page | paper, teal title, short coral rule, no slab |
+| Frame title | teal, short coral rule under |
+| Progress | the same coral rule, growing along the foot |
+| Block | left coral rule, no fill |
+| Item | teal square; subitem coral |
+| Standout | teal field, paper type |
+
+16:9. Left-aligned. No navigation chrome.
+
+* Build the demo
+
+#+begin_src bash
+cd examples
+export TEXINPUTS=../theme:
+# org -> tex if you want; or compile the exported .tex
+#+end_src
+
+A raw TeX smoke lives in =examples/demo.tex=.
+
+* Why not Metropolis
+
+Metropolis is Fira, a dark title slab, and a grey progress hairline.
+This theme keeps the things that snippet already taught the hands
+(=standout=, frame level 2, after-save export) and drops the slab.

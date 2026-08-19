@@ -1,0 +1,61 @@
+%% Outer: one coral rule is the title underline and the progress bar.
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{calc}
+
+\makeatletter
+\newdimen\rg@ruleht
+\rg@ruleht=2.2pt
+\newdimen\rg@progresswd
+
+\def\rg@setprogress{%
+  \rg@progresswd=\paperwidth
+  \ifnum\inserttotalframenumber>0
+    \multiply\rg@progresswd by \insertframenumber
+    \divide\rg@progresswd by \inserttotalframenumber
+  \fi
+}
+
+\defbeamertemplate*{frametitle}{rg}[1][]{%
+  \nointerlineskip
+  \vspace{1.1em}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}%
+    \insertframetitle\par}%
+  \ifx\insertframesubtitle\@empty\else
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{subtitle}%
+      \insertframesubtitle\par}%
+  \fi
+  \vspace{0.45em}%
+  {\color{rgcoral}\rule{0.22\textwidth}{\rg@ruleht}}%
+  \vspace{0.55em}%
+}
+
+\defbeamertemplate*{footline}{rg}{%
+  \rg@setprogress
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3.4ex, dp=1.4ex]{footline}%
+      \ifx\rg@progress\undefined
+      \else
+        \ifx\rg@progress\false
+        \else
+          \begin{tikzpicture}[overlay, remember picture]
+            \fill[rgpaper]
+              (current page.south west) rectangle ++(\paperwidth, 2.2pt);
+            \fill[rgcoral]
+              (current page.south west) rectangle ++(\rg@progresswd, 2.2pt);
+          \end{tikzpicture}%
+        \fi
+      \fi
+      \hfill
+      \usebeamerfont{page number in head/foot}%
+      \usebeamercolor[fg]{page number in head/foot}%
+      \insertframenumber\,/\,\inserttotalframenumber\hspace{3.2mm}%
+    \end{beamercolorbox}}%
+}
+
+\setbeamertemplate{headline}{}
+\makeatother
+
+\mode<all>

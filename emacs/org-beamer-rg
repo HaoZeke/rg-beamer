@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: org-beamer rg
+# contributor: Rohit Goswami (HaoZeke)
+# key: <orgbbmrrg
+# --
+#+TITLE:     ${1:Presentation Title}
+#+SUBTITLE:  ${2:Subtitle}
+#+AUTHOR:    ${3:Rohit Goswami}
+#+EMAIL:     ${4:r.goswami@rug.nl}
+#+DATE:      \\today
+
+#+OPTIONS:   H:2 num:nil toc:nil \\n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:nil pri:nil tags:not-in-toc
+#+LANGUAGE:  en
+
+#+LATEX_COMPILER: xelatex
+#+LaTeX_CLASS: rg-beamer
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169,11pt]
+#+startup: beamer
+#+BEAMER_THEME: rg
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+
+#+LATEX_HEADER: \\usepackage{booktabs}
+#+LATEX_HEADER: \\usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \\usepackage{hyperref}
+
+* ${5:Opening}
+
+$0
+
+* End
+:PROPERTIES:
+:BEAMER_opt: standout
+:END:
+Thank you
+
+# Local Variables:
+# after-save-hook: haozeke/org-save-and-export-beamer
+# End:

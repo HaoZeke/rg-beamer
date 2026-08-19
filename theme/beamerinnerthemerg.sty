@@ -1,0 +1,89 @@
+%% Inner: title page, items, left-rule blocks, standout invert.
+\mode<presentation>
+
+\setbeamertemplate{itemize item}{%
+  \tikz[baseline=-0.2ex]\fill[rgteal] (0,0) rectangle (0.38em,0.38em);%
+}
+\setbeamertemplate{itemize subitem}{%
+  \tikz[baseline=-0.2ex]\fill[rgcoral] (0,0) rectangle (0.28em,0.28em);%
+}
+\setbeamertemplate{itemize subsubitem}{%
+  \tikz[baseline=-0.15ex]\draw[rgteal, line width=0.4pt] (0,0) rectangle (0.24em,0.24em);%
+}
+\setbeamertemplate{enumerate item}{%
+  {\color{rgteal}\bfseries\insertenumlabel.}%
+}
+\setbeamertemplate{enumerate subitem}{%
+  {\color{rgcoral}\insertenumlabel)}%
+}
+
+\setbeamertemplate{caption}{\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+\defbeamertemplate*{title page}{rg}[1][]{%
+  \vspace*{0.18\paperheight}%
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vspace{0.55em}%
+  {\color{rgcoral}\rule{0.28\textwidth}{2.2pt}}%
+  \vspace{0.9em}%
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \vfill
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \vspace{0.35em}%
+  {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+  \vspace{0.25em}%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+}
+
+%% Left rule instead of a filled box. Matches the Kroes answerbox habit.
+\setbeamertemplate{block begin}{%
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[leftskip=0.7em, rightskip=0.4em]{block title}%
+    {\usebeamerfont{block title}\insertblocktitle}%
+  \end{beamercolorbox}%
+  {\color{rgcoral}\vrule width 2pt}\hspace{0.55em}%
+  \begin{minipage}[t]{\dimexpr\textwidth-0.55em-2pt\relax}%
+    \vspace{-1.55em}%
+    \begin{beamercolorbox}[leftskip=0pt]{block body}%
+      \usebeamerfont{block body}\vspace{1.7em}%
+}
+\setbeamertemplate{block end}{%
+    \end{beamercolorbox}%
+  \end{minipage}%
+  \vskip\smallskipamount%
+}
+
+\setbeamertemplate{block alerted begin}{%
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[leftskip=0.7em]{block title alerted}%
+    {\usebeamerfont{block title}\insertblocktitle}%
+  \end{beamercolorbox}%
+  {\color{rgcoral}\vrule width 2pt}\hspace{0.55em}%
+  \begin{minipage}[t]{\dimexpr\textwidth-0.55em-2pt\relax}%
+    \vspace{-1.55em}%
+    \begin{beamercolorbox}{block body alerted}%
+      \usebeamerfont{block body}\vspace{1.7em}%
+}
+\setbeamertemplate{block alerted end}{%
+    \end{beamercolorbox}%
+  \end{minipage}%
+  \vskip\smallskipamount%
+}
+
+%% Metropolis-compatible standout: teal field, paper type.
+\defbeamertemplate*{standout}{rg}{%
+  \setbeamercolor{background canvas}{bg=rgteal}%
+  \setbeamercolor{normal text}{fg=rgpaper, bg=rgteal}%
+  \setbeamercolor{alerted text}{fg=rgcoral}%
+  \usebeamercolor[fg]{normal text}%
+  \centering\vspace*{\fill}%
+  \begin{minipage}{0.86\textwidth}\centering
+    \usebeamerfont{title}\insertframetitle\par
+    \ifx\insertframesubtitle\@empty\else
+      \vspace{0.6em}{\usebeamerfont{subtitle}\insertframesubtitle\par}%
+    \fi
+  \end{minipage}%
+  \vspace*{\fill}%
+}
+
+\mode<all>
