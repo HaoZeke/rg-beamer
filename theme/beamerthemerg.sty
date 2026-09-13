@@ -33,7 +33,15 @@
   \usebeamercolor[fg]{normal text}%
   \centering
 }
-\pretocmd{\beamer@reseteecodes}{\rg@standoutfalse}{}{}
+%% Standout used to leave fg=rgpaper set. The next content frame
+%% then painted body text in paper on paper.
+\pretocmd{\beamer@reseteecodes}{%
+  \rg@standoutfalse
+  \setbeamercolor{normal text}{fg=rgink, bg=rgpaper}%
+  \setbeamercolor{local structure}{fg=rgsteel}%
+  \setbeamerfont{normal text}{size=\normalsize, series=\mdseries}%
+  \usebeamercolor[fg]{normal text}%
+}{}{}
 \makeatother
 
 \mode<all>
